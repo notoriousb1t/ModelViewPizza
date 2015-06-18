@@ -1,0 +1,79 @@
+@import "variables.less";
+@import "mixins.less";
+@import "theme.less";
+
+.width-full {
+	width: 100%;
+}
+
+.height-full {
+	height: 100%;
+}
+
+body {
+	background-color: #222;
+}
+
+#heroImage {
+	background-image: url('../images/oven.jpg');
+	background-size: cover;
+	color: #EEEEEE;
+	text-shadow: 0 3px 3px black;
+}
+
+#cuttingBoard {
+	background-image: url('../images/board.png');
+	background-size: cover;
+	border-radius: 3.5em;
+}
+
+.pizza {
+	position: relative;
+	padding: 0 !important;
+}
+
+.pizzaLarge {
+	width: 100% !important;
+}
+.pizzaMedium {
+	width: 80% !important;
+}
+
+.pizza .topping {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+#overlay {
+	&:not(.affix) {
+		position: absolute;
+		top: 370px;
+		height: 800px;
+		width: 100%;
+	}
+	
+	&.affix {
+		position: fixed;
+	    top: 70px;
+		bottom: 30px;
+		width: 100%;
+	}
+}
+
+.panel {
+	background-color: transparent;
+	color: #eee;
+}
+
+.checkboxlist-inline .checkbox {
+	display: inline-block;
+	width: 48.5%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.text-center-important { 
+	text-align: center !important;
+}

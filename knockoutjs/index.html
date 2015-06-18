@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en-us">
+<head lang="en-us">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Knockout Pizza</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/styles/site.min.css" />
+</head>
+<body>
+    <div id="overlay" data-spy="affix" data-offset-top="300" class="hidden-xs">
+        <div class="container height-full">
+            <div class="col-sm-8 col-md-6 height-full">
+                <div class="height-full">
+                    <div id="cuttingBoard" class="pizza well well-lg" data-bind="css: { pizzaMedium: order.size() == 'Medium', pizzaLarge: order.size() == 'Large' }">
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + order.crust() + '.png' }" class="width-full" />
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + order.sauce() + '.png' }" class="topping" />
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + order.cheese() + '.png' }" class="topping" />
+                        <div data-bind="foreach: order.toppings">
+                            <img data-bind="attr: { src: '/assets/images/pizza/' + $data + '.png' }" class="topping" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Model View Pizza</a>
+            </div>
+        </div>
+    </nav>
+    <div id="heroImage" class="jumbotron">
+        <div class="container">
+            <h1>Knockout Pizza</h1>
+            <p>A Knockout.js application for creating digital pizzas</p>
+            <p><a class="btn btn-primary btn-lg" href="http://notoriousb1t.com" role="button">Read About This &raquo;</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-8 col-sm-4 col-md-offset-6 col-md-6 col-xs-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Choose your crust</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select data-bind="value: order.crust, options: options.crusts" class="form-control" aria-label="Crust"></select>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Pick a size</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select data-bind="value: order.size, options: options.sizes" class="form-control" aria-label="Size"></select>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>You've chosen</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select data-bind="value: order.preset, options: options.presets" class="form-control" aria-label="Preset"></select>
+                    </div>
+                </div>
+
+                <div class="panel" data-bind="visible: order.isCustom">
+                    <div class="panel-heading">
+                        <h3>Add toppings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <dl data-bind="foreach: options.toppings" class="checkboxlist-inline">
+                            <dd class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-bind="checkedValue: $data, checked: $root.order.toppings" />
+                                    <span data-bind="text: $data"></span>
+                                </label>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Choose your sauce</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select data-bind="value: order.sauce, options: options.sauces" class="form-control" aria-label="Sauce"></select>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Cheese intensity!</h3>
+                    </div>
+                    <div class="panel-body">
+                        <select data-bind="value: order.cheese, options: options.cheeses" class="form-control" aria-label="Cheese"></select>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <button class="btn btn-lg btn-success" data-bind="click: submit"  data-toggle="modal" data-target="#myModal">Cook it Already!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+            Your <span data-bind="text: order.preset()"></span> Pizza is done!
+        </h4>
+      </div>
+      <div class="modal-body">
+          Your <span data-bind="text: order.size()"></span> <span data-bind="text: order.crust()"></span> pizza has 
+        <span data-bind="foreach: order.toppings">
+            <span data-bind="text: $data"></span>,
+        </span>
+        <span data-bind="text: order.sauce()"></span>, and <span data-bind="text: order.cheese()"></span>.  Once you are finished
+        with that slice... <h3>be sure to checkout the source on GitHub!</h3>
+      </div>
+      <div class="modal-footer text-center-important">
+        <button type="button" class="btn btn-default" data-bind="click: reload">
+            <span class="glyphicon glyphicon-refresh"></span>
+            Reload</button>
+        <a href="#" class="btn btn-default">
+            <img style="width: 32px;" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /> GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-debug.js"></script>
+<script src="/assets/scripts/config.js"></script>
+<script src="ko-app.js"></script>
+</body>
+</html>
