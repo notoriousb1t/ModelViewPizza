@@ -6,19 +6,29 @@
 	var options = config.options;
 	
 	function ViewModel() {
-		// bind prototype methods to this explicitly
-		for (var propName in this) {
-			if (typeof this[propName] === 'function') {
-				this[propName] = this[propName].bind(this);
-			}
-		}
+		var self = this;
 		
 		// setup initial order
-		this.startNewOrder();
+		this.order = {
+			crust: ko.observable(initial.crust),
+			size: ko.observable(initial.size),
+			preset: ko.observable(initial.preset),
+			sauce: ko.observable(initial.sauce),
+			cheese: ko.observable(initial.cheese),
+			toppings: ko.observableArray([]),
+			isCustom: ko.pureComputed(function() {
+				return self.order.preset() === initial.preset;
+			})
+		};
+		
+		// setup explicit change event for presets
+		this.order.preset.subscribe(function(newValue){
+			self.changePreset(self, newValue);
+		});
 	}
 	
 	ViewModel.prototype = {
-		changePreset: function(newValue) {
+		changePreset: function(vm, newValue) {
 			// remove all toppings
 			this.order.toppings.removeAll();
 			
@@ -40,23 +50,6 @@
 			}
 		},	
 		options: options,
-		startNewOrder: function() {
-			var self = this;
-			this.order = {
-				crust: ko.observable(initial.crust),
-				size: ko.observable(initial.size),
-				preset: ko.observable(initial.preset),
-				sauce: ko.observable(initial.sauce),
-				cheese: ko.observable(initial.cheese),
-				toppings: ko.observableArray([]),
-				isCustom: ko.pureComputed(function() {
-					return self.order.preset() === initial.preset;
-				})
-			};
-			
-			// setup explicit change event for presets
-			this.order.preset.subscribe(this.changePreset);
-		},
 		submit: function() {
 			console.log(this);
 		},
