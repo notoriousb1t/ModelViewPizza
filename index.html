@@ -7,17 +7,22 @@
 		<link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
 	</head>
 	<body>
-		<nav class="page-nav grod">
-			<div class="grid">
+		<nav class="page-nav">
+			<div class="grid stage-center">
 				<div class="width-1-2">
-					<img src="/assets/images/logo with text.svg" height="38" />					
+					<a target="blank" href="/">
+						<img src="/assets/images/logo with text.svg" height="38" />
+                    </a>
+					<a class="nav-item" target="blank" href="https://github.com/notoriousb1t/modelviewpizza">
+                        GitHub
+                    </a>
 				</div>
 				<div class="width-1-2 text-right">
 					<!-- toolbar items -->
 				</div>
 			</div>
 		</nav>
-		<div class="page-content">
+		<div class="page-content stage-center">
 			<div class="relative">
 				<div class="absolute">
 					<div class="pane">
@@ -50,8 +55,10 @@
 		</div>
 		<script>
 			(function() {
+				var forEach = Array.prototype.forEach;
 				var results = document.querySelectorAll('[data-href]');
-				Array.prototype.forEach.call(results, function(el) {
+				
+				forEach.call(results, function(el) {
 					el.addEventListener('click', function(e){
 						window.location.href = el.dataset.href;
 					});
