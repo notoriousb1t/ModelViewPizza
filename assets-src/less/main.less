@@ -90,10 +90,26 @@ div, nav {
 
 .unstyled {
 	&button {
-		outline: 0;
-		background: none;
-		border: none;
+		.btn-simple();
 	}
+}
+
+.ddl {
+	height: 34px;
+	width: 100%;
+	border-radius: 4px;
+}
+
+.btn {
+	.btn-simple();
+	padding: 1em;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.form-group {
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 // grid system
@@ -289,4 +305,10 @@ button.clickable {
     -o-transform: scale(@by);
     -webkit-transform: scale(@by);
     transform: scale(@by);
+}
+
+.btn-simple {
+	outline: 0;
+	background: none;
+	border: solid thin #999999;
 }

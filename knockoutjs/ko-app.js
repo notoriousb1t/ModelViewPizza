@@ -1,6 +1,9 @@
+/// <reference path="../typings/knockout/knockout.d.ts" />
+
 (function() {
 	'use strict';
 	// import configuration from config.js
+	var config = window.config;
 	var initial = config.initial;
 	var presets = config.presets;
 	var options = config.options;

@@ -1,4 +1,4 @@
-// for simplicity's sake, this is attached to the window
+// for simplicity"s sake, this is attached to the window
 // instead of being loaded as a .json file through ajax
 window.config = {
 	"initial": {
@@ -6,7 +6,8 @@ window.config = {
 		"size": "Large",
 		"crust": "Hand Tossed",
 		"sauce": "Sauce",
-		"cheese": "Cheese"
+		"cheese": "Cheese",
+		"step": 0
 	},
 	"presets": {
 		"Meat Lovers": {
@@ -22,6 +23,13 @@ window.config = {
 			"toppings": ["Sausage", "Green Peppers", "Olives", "Onions", "Pepperoni"]
 		}
 	},
+	"steps": {
+		"start": 0,
+		"sauce": 1,
+		"toppings": 2,
+		"done": 3
+	},
+	"stepNames": ["Start", "Sauce/Cheese", "Toppings", "Done"],
 	"options": {
 			"crusts": ["Hand Tossed", "Thin Crust"],
 			"sizes": ["Medium", "Large"],

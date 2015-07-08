@@ -1,0 +1,88 @@
+<html lang="en-us">
+	<head>
+		<title>AngularjS - Model View Pizza</title>
+		<link href="http://fonts.googleapis.com/css?family=Sarala:400,700" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/assets/styles/main.min.css" />
+		<link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
+		<script src="/assets/scripts/config.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	</head>
+	<body>
+		<nav class="page-nav">
+			<div class="grid stage-center">
+				<div class="width-1-2">
+					<a target="blank" href="/">
+						<img src="/assets/images/logo with text.svg" height="38" />
+                    </a>
+					<a class="nav-item" target="blank" href="https://github.com/notoriousb1t/modelviewpizza">
+                        GitHub
+                    </a>
+				</div>
+				<div class="width-1-2">
+				</div>
+			</div>
+		</nav>
+		
+		<div ng-app="app" ng-controller="OrderController" class="page-content">
+			<div class="grid stage-center">
+				<div class="width-1-2">
+					
+				</div>
+				<div class="width-1-2">
+					<div class="pane">
+						<div ng-show="order.step == steps.start" ng-cloak>
+							<div class="form-group">
+		                        <h3>Pick a Size</h3>
+		                        <select ng-options="size for size in options.sizes" ng-model="order.size" class="ddl" aria-label="Select a Size">
+								</select>
+							</div>
+							<div class="form-group">
+								<h3>Pick a Crust</h3>
+		                        <select ng-options="crust for crust in options.crusts" ng-model="order.crust" class="ddl" aria-label="Select a Crust">
+								</select>
+							</div>
+							<div class="form-group">
+								<h3>You've Chosen</h3>
+		                        <select ng-options="preset for preset in options.presets" ng-model="order.preset" class="ddl" aria-label="Select a Pizza Type">
+								</select>
+							</div>
+						</div>
+						<div ng-show="order.step == steps.sauce" ng-cloak>
+							<div class="form-group">
+		                        <h3>Choose a Sauce</h3>
+		                        <select ng-options="sauce for sauce in options.sauces" ng-model="order.sauce" class="ddl" aria-label="Select a Sauce">
+								</select>
+							</div>
+							<div class="form-group">
+								<h3>Choose Cheese Intensity!</h3>
+		                        <select ng-options="cheese for cheese in options.cheeses" ng-model="order.cheese" class="ddl" aria-label="Select a Cheese">
+								</select>
+							</div>
+	                    </div>
+						
+						<div ng-show="order.step == steps.toppings" ng-cloak>
+							<div class="form-group">
+								<label ng-repeat="topping in options.toppings">
+									<input
+									    type="checkbox"
+									    value="{{topping}}"
+									    ng-checked="order.toppings.indexOf(topping) > -1"
+									    ng-click="toggleSelection(topping)"> 
+									<span ng-bind="topping"></span>
+								</label>
+							</div>
+						</div>
+						
+						<div class="form-group text-right">
+							<button ng-click="next()" ng-bind="nextText()" class="btn"></button>
+						</div>
+                    </div>
+					
+				</div>
+			</div>
+		</div>
+			
+		<script src="ng-app.js"></script>
+	</body>
+</html>

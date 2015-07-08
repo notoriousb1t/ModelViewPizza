@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 		less: {
 			prod: {
 				files: {
-					"assets/styles/site.min.css": "assets-src/less/site.less"					
+					"assets/styles/theme.min.css": "assets-src/less/bootstrap/export.less"					
 				},
 				options: {
 					compress: true
