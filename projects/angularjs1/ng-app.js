@@ -1,4 +1,4 @@
-/// <reference path="../typings/angular/angular1.d.ts" />
+/// <reference path="../../typings/angular/angular1.d.ts" />
 (function() {
 	'use strict';
 	var config = window.config;
