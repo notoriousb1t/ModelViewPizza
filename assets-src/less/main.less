@@ -88,6 +88,15 @@ div, nav {
 	.box-sizing();
 }
 
+input, textarea, select, button {
+	font-size: @font-size-base;
+	.level(1);
+}
+
+select, button, input[type="checkbox"], .checkbox {
+	cursor: pointer;
+}
+
 .unstyled {
 	&button {
 		.btn-simple();
@@ -105,6 +114,16 @@ div, nav {
 	padding: 1em;
 	border-radius: 4px;
 	cursor: pointer;
+	.clickable();
+}
+
+.btn-inverse { 
+	background-color: @nav-bg;
+	color: @nav-fg;
+	
+	&:hover {
+		color: lighten(@nav-fg, 30%);
+	}
 }
 
 .form-group {
@@ -174,8 +193,6 @@ div, nav {
 	padding-top: @nav-y;
 	background-color: @base-bg;
 	color: @base-fg;
-	min-height: 100vh;
-	height: 100%;
 	padding: 0;
 }
 
@@ -210,8 +227,39 @@ div, nav {
 	}
 }
 
+.checkboxlist-inline .checkbox {
+	display: inline-block;
+	width: 48.5%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 #heroImage {
 	background-image: url('../images/oven.jpg');
+}
+
+#cuttingBoard {
+	background-size: cover;
+	border-radius: 2em;
+}
+
+.pizza {
+	position: relative;
+	padding: 0 !important;
+}
+
+.pizzaLarge {
+	width: 100% !important;
+}
+.pizzaMedium {
+	width: 80% !important;
+}
+
+.pizza .topping {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
 }
 
 // utility
@@ -244,15 +292,7 @@ div, nav {
 }
 
 .clickable {
-	cursor: pointer;
-}
-div.clickable,
-button.clickable {
-	.level(2);
-	
-	&:hover {
-		.level(3);
-	}
+	.clickable();
 }
 
 @media screen and (max-width: @screen-md) {
@@ -265,6 +305,16 @@ button.clickable {
 .box-sizing(@mode: border-box) {
 	-webkit-box-sizing: @mode;
 	box-sizing: @mode;
+}
+
+.clickable() {
+	cursor: pointer;
+	.level(1);
+	
+	&:hover {
+		.level(3);
+		.scale(1.1);
+	}
 }
 
 .level-1 {

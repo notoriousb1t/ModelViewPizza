@@ -10,6 +10,18 @@ window.config = {
 		"step": 0
 	},
 	"presets": {
+		"Deluxe": {
+			"sauce": "Sauce",
+			"toppings": ["Sausage", "Green Peppers", "Olives", "Onions", "Pepperoni"]
+		},
+		"Hawaiian": {
+			"sauce": "Sauce",
+			"toppings": ["Ham", "Pineapple"]
+		},
+		"Hawaiian Barbecue": {
+			"sauce": "BBQ Sauce",
+			"toppings": ["Ham", "Pineapple"]
+		},
 		"Meat Lovers": {
 			"sauce": "Sauce",
 			"toppings": ["Italian Sausage", "Sausage", "Ham", "Pepperoni"]
@@ -17,10 +29,6 @@ window.config = {
 		"Veggie Lovers": {
 			"sauce": "Sauce",
 			"toppings": ["Green Peppers", "Olives", "Onions", "Tomatoes"]
-		},
-		"Deluxe": {
-			"sauce": "Sauce",
-			"toppings": ["Sausage", "Green Peppers", "Olives", "Onions", "Pepperoni"]
 		}
 	},
 	"steps": {
@@ -33,7 +41,8 @@ window.config = {
 	"options": {
 			"crusts": ["Hand Tossed", "Thin Crust"],
 			"sizes": ["Medium", "Large"],
-			"presets": ["Build Your Own", "Meat Lovers", "Veggie Lovers", "Deluxe"],
+			"presets": ["Build Your Own", "Deluxe", "Hawaiian", "Hawaiian Barbecue", 
+				"Meat Lovers", "Veggie Lovers"],
 			"sauces": ["Sauce", "BBQ Sauce"],
 			"cheeses": ["Wimpy Cheese", "Cheese", "Mega Cheese"],
 			"toppings": ["Pepperoni", "Sausage", "Italian Sausage", "Ham", "Green Peppers", "Olives", 

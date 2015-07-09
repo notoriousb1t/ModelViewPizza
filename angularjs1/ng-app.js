@@ -9,24 +9,71 @@
 	var app = angular.module('app', []);
 	
 	app.controller('OrderController', ['$scope', function($scope) {
+		// options
 		$scope.options = options;		
 		$scope.steps = config.steps;
 		$scope.stepNames = config.stepNames;
-		$scope.order = {
-			step: initial.step,
-			crust: initial.crust,
-			size: initial.size,
-			preset: initial.preset,
-			sauce: initial.sauce,
-			cheese: initial.cheese,
-			toppings: [],
-			isCustom: function() {
-				return $scope.order.preset() === initial.preset;
-			}
+		
+		// setup initial model values
+		$scope.step = initial.step;
+		$scope.crust = initial.crust;
+		$scope.size = initial.size;
+		$scope.preset = initial.preset;
+		$scope.sauce = initial.sauce;
+		$scope.cheese = initial.cheese;
+		$scope.toppings = [];
+		
+		// computed values
+		$scope.isCustom = function() {
+			return $scope.preset === initial.preset;
 		};
-		$scope.changePreset = function(vm, newValue) {
+		$scope.hasTopping = function(topping) {
+			return $scope.toppings.indexOf(topping) !== -1;
+		}
+		$scope.nextText = function() {
+			var isLastStep = $scope.stepNames.length - 1 == $scope.step;
+			return isLastStep ? 'Restart' : 'Next';
+		}
+		
+		// events
+		$scope.toggleTopping = function(topping) {
+			// get index of topping
+			var indexOfTopping = $scope.toppings.indexOf(topping);
+			if (indexOfTopping === -1) {
+				// add topping if not exist
+				$scope.toppings.push(topping);
+				return;
+			}
+			
+			// remove topping
+			$scope.toppings.splice(indexOfTopping, 1);
+		};
+		$scope.prev = function()  {
+			var newStep = $scope.step - 1;
+			if (newStep < 0) {
+				newStep = 0;
+			}
+			$scope.step = newStep;
+		};
+		$scope.next = function() {
+			var newStep = $scope.step + 1
+			if (newStep >= $scope.stepNames.length) {
+				window.location.reload();
+			}
+			$scope.step = newStep;
+		};
+		$scope.submit = function() {
+			console.log($scope);
+		};
+		// watch the preset
+		$scope.$watch('preset', function (newValue, oldValue) {
+			if (newValue === oldValue) {
+				// skip updates when the preset hasn't changed
+				return;
+			}
+			
 			// remove all toppings
-			$scope.order.toppings.removeAll();
+			$scope.toppings = [];
 			
 			for (var presetName in presets) {
 				// skip presets that don't match this
@@ -37,30 +84,12 @@
 				var preset = presets[presetName];
 				
 				// change sauce to preset
-				this.order.sauce(preset.sauce);
+				$scope.sauce = preset.sauce;
 				
 				// add all preset toppings into
-				var toppings = $scope.order.toppings;
-				toppings.push.apply(toppings, preset.toppings);
+				$scope.toppings = preset.toppings.slice(0);
 				break;
 			}
-		};
-		$scope.next = function() {
-			var newStep = $scope.order.step + 1
-			if (newStep >= $scope.stepNames.length) {
-				newStep = 0;
-			}
-			$scope.order.step = newStep;
-		};
-		$scope.nextText = function() {
-			var isLastStep = $scope.stepNames.length - 1 == $scope.order.step;
-			return isLastStep ? 'Restart!' : 'Next';
-		}
-		$scope.submit = function() {
-			console.log($scope);
-		};
-		$scope.reload = function() {
-			window.location.reload();
-		};
+    	});
 	}]);
 }());
