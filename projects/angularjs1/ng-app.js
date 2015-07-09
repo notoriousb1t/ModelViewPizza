@@ -62,9 +62,6 @@
 			}
 			$scope.step = newStep;
 		};
-		$scope.submit = function() {
-			console.log($scope);
-		};
 		// watch the preset
 		$scope.$watch('preset', function (newValue, oldValue) {
 			if (newValue === oldValue) {
