@@ -1,5 +1,8 @@
 <html lang="en-us">
 	<head>
+		<meta charset="utf-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>AngularjS - Model View Pizza</title>
 		<link href="http://fonts.googleapis.com/css?family=Sarala:400,700" rel="stylesheet" type="text/css">
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
@@ -41,29 +44,29 @@
 						<div ng-show="step == steps.start" ng-cloak>
 							<div class="form-group">
 		                        <h3>Pick a Size</h3>
-		                        <select ng-options="size for size in options.sizes" ng-model="size" class="ddl" aria-label="Select a Size">
+		                        <select ng-options="size for size in options.sizes" ng-model="size" class="ddl" aria-label="Pick a size">
 								</select>
 							</div>
 							<div class="form-group">
 								<h3>Pick a Pizza</h3>
-		                        <select ng-options="preset for preset in options.presets" ng-model="preset" class="ddl" aria-label="Select a Pizza Type">
+		                        <select ng-options="preset for preset in options.presets" ng-model="preset" class="ddl" aria-label="Pick a pizza">
 								</select>
 							</div>
 						</div>
 						<div ng-show="step == steps.sauce" ng-cloak>
 							<div class="form-group">
 								<h3>Select Crust</h3>
-		                        <select ng-options="crust for crust in options.crusts" ng-model="crust" class="ddl" aria-label="Select a Crust">
+		                        <select ng-options="crust for crust in options.crusts" ng-model="crust" class="ddl" aria-label="Select Crust">
 								</select>
 							</div>
 							<div class="form-group">
 		                        <h3>Select Sauce</h3>
-		                        <select ng-options="sauce for sauce in options.sauces" ng-model="sauce" class="ddl" aria-label="Select a Sauce">
+		                        <select ng-options="sauce for sauce in options.sauces" ng-model="sauce" class="ddl" aria-label="Select Sauce">
 								</select>
 							</div>
 							<div class="form-group">
 								<h3>Select Cheese Intensity!</h3>
-		                        <select ng-options="cheese for cheese in options.cheeses" ng-model="cheese" class="ddl" aria-label="Select a Cheese">
+		                        <select ng-options="cheese for cheese in options.cheeses" ng-model="cheese" class="ddl" aria-label="Select Cheese Intensity!">
 								</select>
 							</div>
 	                    </div>
