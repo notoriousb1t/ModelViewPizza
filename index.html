@@ -1,67 +1,64 @@
 <html lang="en-us">
-	<head>
-		<meta charset="utf-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Home - Model View Pizza</title>
-		<link href='http://fonts.googleapis.com/css?family=Sarala:400,700' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="/assets/styles/main.min.css" />
-		<link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
-	</head>
-	<body>
-		<nav class="page-nav">
-			<div class="grid">
-				<div class="width-1-2">
-					<a target="blank" href="/">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home - Model View Pizza</title>
+        <link href='http://fonts.googleapis.com/css?family=Sarala:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="/assets/styles/main.min.css" />
+        <link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
+    </head>
+    
+    <body>
+        <nav class="page-nav">
+            <div class="grid">
+                <div class="width-1-2">
+                    <a target="blank" href="/">
 						<img src="/assets/images/logo with text.svg" height="38" />
                     </a>
-					<a class="nav-item" target="blank" href="https://github.com/notoriousb1t/modelviewpizza">
+                    <a class="nav-item" target="blank" href="https://github.com/notoriousb1t/modelviewpizza">
                         GitHub
                     </a>
-				</div>
-				<div class="width-1-2 text-right">
-					<!-- toolbar items -->
-				</div>
-			</div>
-		</nav>
-		<div class="page-content">
-			<div class="relative">
-				<div class="absolute text-inverse">
-					<div class="grid padding">
-						<div class="width-1-1">
-							<h1>Model View Pizza</h1>
-							<p class="hidden-sm">A practical application of JavaScript MV* Frameworks</p>
-						</div>
-					</div>
-				</div>
-				<img src="/assets/images/oven.jpg" class="img-responsive level-2" />
-			</div>
-			<div class="grid">
-				<div class="width-1-3 text-center">
-					<div class="pane clickable" data-href="/projects/knockoutjs">
-						<h2>KnockoutJS</h2>
-						<p>
-							KnockoutJS is a Model View ViewModel framework that is simple and explicit.  It was released in 2010
-							and has stayed very easy to use and easy to understand.
-						</p>
-					</div>
-				</div>
-				<div class="width-1-3 text-center">
-					<div class="pane clickable" data-href="/projects/angularjs1">
-						<h2>AngularJS 1</h2>
-						<p>
-							AngularJS is a highly productive Model View Controller framework by Google that 
-							has widespread support by the developer community as a whole.
-						</p>
-					</div>
-				</div>
-				<div class="width-1-3">
-				</div>
-			</div>
-		</div>
-		<script>
-			(function() {
+                </div>
+                <div class="width-1-2 text-right">
+                    <!-- toolbar items -->
+                </div>
+            </div>
+        </nav>
+        <div class="page-content">
+            <div class="relative">
+                <div class="absolute text-inverse">
+                    <div class="grid padding">
+                        <div class="width-1-1">
+                            <h1>Model View Pizza</h1>
+                            <p class="hidden-sm">A practical application of JavaScript MV* Frameworks</p>
+                        </div>
+                    </div>
+                </div>
+                <img src="/assets/images/oven.jpg" class="img-responsive level-2" />
+            </div>
+            <div class="grid">
+                <div class="width-1-3 text-center">
+                    <div class="pane clickable" data-href="/projects/knockoutjs">
+                        <h2>KnockoutJS</h2>
+                        <p>KnockoutJS is a Model View ViewModel framework that is simple and explicit. It was released in 2010 and has stayed very
+                            easy to use and easy to understand.</p>
+                    </div>
+                </div>
+                <div class="width-1-3 text-center">
+                    <div class="pane clickable" data-href="/projects/angularjs1">
+                        <h2>AngularJS 1</h2>
+                        <p>AngularJS is a highly productive Model View Controller framework by Google that has widespread support by the developer
+                            community as a whole.</p>
+                    </div>
+                </div>
+                <div class="width-1-3"></div>
+            </div>
+        </div>
+        <script>
+            (function() {
 				var forEach = Array.prototype.forEach;
 				var results = document.querySelectorAll('[data-href]');
 				
@@ -70,7 +67,8 @@
 						window.location.href = el.dataset.href;
 					});
 				});
-			})();
-		</script>
-	</body>
+			}());
+        </script>
+    </body>
+
 </html>

@@ -1,14 +1,14 @@
 {
-  "name": "model-view-pizza",
-  "version": "0.0.1",
-  "description": "A pizza ordering page setup with multiple JavaScript MV* Frameworks",
-  "author": "notoriousb1t",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-less": "^1.0.1"
-  },
-  "dependencies": {
-    "connect": "^3.4.0",
-    "serve-static": "^1.10.0"
-  }
+    "name": "model-view-pizza",
+    "version": "0.0.1",
+    "description": "A pizza ordering page setup with multiple JavaScript MV* Frameworks",
+    "author": "notoriousb1t",
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-contrib-less": "^1.0.1"
+    },
+    "dependencies": {
+        "connect": "^3.4.0",
+        "serve-static": "^1.10.0"
+    }
 }
