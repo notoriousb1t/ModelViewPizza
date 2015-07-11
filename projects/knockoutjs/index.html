@@ -1,162 +1,106 @@
-<!doctype html>
 <html lang="en-us">
     
-    <head lang="en-us">
+    <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Knockout Pizza</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/png" href="/assets/images/favicon.ico" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/assets/styles/theme.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KnockoutJS - Model View Pizza</title>
+        <link href="http://fonts.googleapis.com/css?family=Sarala:400,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/assets/styles/main.min.css" />
+        <link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
         <script src="/assets/scripts/config.js"></script>
     </head>
     
     <body>
-        <div id="overlay" data-spy="affix" data-offset-top="90" class="hidden-xs">
-            <div class="container height-full">
-                <div class="col-sm-8 col-md-6 height-full">
-                    <div class="height-full">
-                        <div id="cuttingBoard" class="pizza well well-lg" data-bind="css: { pizzaMedium: order.size() == 'Medium', pizzaLarge: order.size() == 'Large' }">
-                            <img data-bind="attr: { src: '/assets/images/pizza/' + order.crust() + '.png' }" class="width-full" />
-                            <img data-bind="attr: { src: '/assets/images/pizza/' + order.sauce() + '.png' }" class="topping" />
-                            <img data-bind="attr: { src: '/assets/images/pizza/' + order.cheese() + '.png' }" class="topping" />
-                            <div data-bind="foreach: order.toppings">
-                                <img data-bind="attr: { src: '/assets/images/pizza/' + $data + '.png' }" class="topping" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav id="navbar" class="navbar navbar-inverse" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                    <img src="/assets/images/logo with text.svg" height="38" /> &nbsp;
-                </a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a target="blank" href="https://github.com/notoriousb1t/modelviewpizza">
+        <nav class="page-nav">
+            <div class="grid stage-center">
+                <div class="width-1-2">
+                    <a href="/">
+						<img src="/assets/images/logo with text.svg" height="38" />
+                    </a>
+                    <a class="nav-item" target="_blank" href="https://github.com/notoriousb1t/modelviewpizza">
                         GitHub
                     </a>
-                    </li>
-                </ul>
+                </div>
+                <div class="width-1-2"></div>
             </div>
         </nav>
-        <div class="container">
-            <div id="heroImage">
-                <h1>Knockout Pizza</h1>
-                <p>A Knockout.js application for creating digital pizzas</p>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-8 col-sm-4 col-md-offset-6 col-md-6 col-xs-12">
-                    <div class="well">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3>Choose your crust</h3>
+        <div ng-app="app" ng-controller="OrderController" class="page-content">
+            <div class="grid stage-center">
+                <div class="width-1-2 hidden-sm">
+                    <div id="cuttingBoard" class="pizza" data-bind="css: { pizzaMedium: size() == 'Medium', pizzaLarge: size() == 'Large' }">
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + crust() + '.png' }" class="topping" />
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + sauce() + '.png' }" class="topping" />
+                        <img data-bind="attr: { src: '/assets/images/pizza/' + cheese() + '.png' }" class="topping" />
+                        <div data-bind="foreach: toppings">
+                            <img data-bind="attr: { src: '/assets/images/pizza/' + $data + '.png' }" class="topping" />
+                        </div>
+                    </div>
+                </div>
+                <div class="width-1-2">
+                    <div class="pane level-3">
+                        <div data-bind="if: isStepStart">
+                            <div class="form-group">
+                                <h3>Pick a Size</h3>
+                                <select data-bind="value: size, options: options.sizes" class="ddl" aria-label="Pick a size"></select>
                             </div>
-                            <div class="panel-body">
-                                <select data-bind="value: order.crust, options: options.crusts" class="form-control" aria-label="Crust"></select>
+                            <div class="form-group">
+                                <h3>Pick a Pizza</h3>
+                                <select data-bind="value: preset, options: options.presets" class="ddl" aria-label="Pick a pizza"></select>
                             </div>
                         </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3>Pick a size</h3>
+                        <div data-bind="if: isStepSauce">
+                            <div class="form-group">
+                                <h3>Select Crust</h3>
+                                <select data-bind="value: crust, options: options.crusts" class="ddl" aria-label="Select Crust"></select>
                             </div>
-                            <div class="panel-body">
-                                <select data-bind="value: order.size, options: options.sizes" class="form-control" aria-label="Size"></select>
+                            <div class="form-group">
+                                <h3>Select Sauce</h3>
+                                <select data-bind="value: sauce, options: options.sauces" class="ddl" aria-label="Select Sauce"></select>
                             </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3>You've chosen</h3>
-                            </div>
-                            <div class="panel-body">
-                                <select data-bind="value: order.preset, options: options.presets" class="form-control" aria-label="Preset"></select>
+                            <div class="form-group">
+                                <h3>Select Cheese Intensity!</h3>
+                                <select data-bind="value: cheese, options: options.cheeses" class="ddl" aria-label="Select Cheese Intensity!"></select>
                             </div>
                         </div>
-                        <div class="panel" data-bind="visible: order.isCustom">
-                            <div class="panel-heading">
-                                <h3>Add toppings</h3>
-                            </div>
-                            <div class="panel-body">
-                                <dl data-bind="foreach: options.toppings" class="checkboxlist-inline">
-                                    <dd class="checkbox">
-                                        <label>
-                                            <input type="checkbox" data-bind="checkedValue: $data, checked: $root.order.toppings" />
-                                            <span data-bind="text: $data"></span>
-                                        </label>
-                                    </dd>
-                                </dl>
-                            </div>
+                        <div data-bind="if: isStepToppings">
+                            <h3>Customize Your Toppings!</h3>
+                            <dl data-bind="foreach: options.toppings" class="checkboxlist-inline">
+                                <dd class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-bind="checkedValue: $data, checked: $root.toppings" />
+                                        <span data-bind="text: $data"></span>
+                                    </label>
+                                </dd>
+                            </dl>
                         </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3>Choose your sauce</h3>
-                            </div>
-                            <div class="panel-body">
-                                <select data-bind="value: order.sauce, options: options.sauces" class="form-control" aria-label="Sauce"></select>
-                            </div>
+                        <div data-bind="if: isStepDone" class="text-center">
+                            <h4>Your <span data-bind="text: preset"></span> is done!</h4>
+                            <p>Your <span data-bind="text: size"></span> <span data-bind="text: crust"></span> pizza has
+                                <span data-bind="foreach: toppings">
+                                    <span data-bind="text: $data"></span>,
+                                </span>
+                                <span data-bind="text: sauce"></span>, 
+                                and <span data-bind="text: cheese"></span>.</p>
+                            <p>
+                                <small>Once you are finished with that slice...</small>
+                            </p>
+                            <h5>be sure to checkout the source on
+                                <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/knockoutjs">GitHub!</a>
+                            </h5>
                         </div>
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3>Cheese intensity!</h3>
-                            </div>
-                            <div class="panel-body">
-                                <select data-bind="value: order.cheese, options: options.cheeses" class="form-control" aria-label="Cheese"></select>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <button class="btn btn-lg btn-success width-full" data-bind="click: submit" data-toggle="modal" data-target="#myModal">Cook it Already!</button>
+                        <div class="form-group text-center">
+                            <button ng-show="step > steps.start" data-bind="click prev" class="btn">&laquo; Prev</button>
+                            <button data-bind="click: next" class="btn btn-inverse">
+                                <span data-bind="text: nextText"></span>&raquo;
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content text-center">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Your
-                            <span data-bind="text: order.preset()"></span>Pizza is done!</h4>
-                    </div>
-                    <div class="modal-body">Your
-                        <span data-bind="text: order.size()"></span>
-                        <span data-bind="text: order.crust()"></span>pizza has
-                        <span data-bind="foreach: order.toppings">
-                            <span data-bind="text: $data"></span>,</span>
-                        <span data-bind="text: order.sauce()"></span>, and
-                        <span data-bind="text: order.cheese()"></span>. Once you are finished with that slice...
-                        <h3>be sure to checkout the source on GitHub!</h3>
-                    </div>
-                    <div class="modal-footer text-center-important">
-                        <button type="button" class="btn btn-default" data-bind="click: reload">
-                            <span class="glyphicon glyphicon-refresh"></span>Reload</button>
-                        <a href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/knockoutjs" class="btn btn-default">
-            <img style="width: 32px;" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" /> GitHub
-        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-debug.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
         <script src="ko-app.js"></script>
     </body>
 

@@ -1,65 +1,93 @@
 /// <reference path="../../typings/knockout/knockout.d.ts" />
-
 (function () {
     'use strict';
-    // import configuration from config.js
+    // import shared settings from config on window
     var config = window.config;
     var initial = config.initial;
     var presets = config.presets;
     var options = config.options;
+    var steps = config.steps;
 
     function ViewModel() {
-        var self = this;
+        // setup initial model values
+        this.step = ko.observable(initial.step);
+        this.crust = ko.observable(initial.crust);
+        this.size = ko.observable(initial.size);
+        this.preset = ko.observable(initial.preset);
+        this.sauce = ko.observable(initial.sauce);
+        this.cheese = ko.observable(initial.cheese);
+        this.toppings = ko.observableArray([]);
 		
-        // setup initial order
-        this.order = {
-            crust: ko.observable(initial.crust),
-            size: ko.observable(initial.size),
-            preset: ko.observable(initial.preset),
-            sauce: ko.observable(initial.sauce),
-            cheese: ko.observable(initial.cheese),
-            toppings: ko.observableArray([]),
-            isCustom: ko.pureComputed(function () {
-                return self.order.preset() === initial.preset;
-            })
-        };
-		
-        // setup explicit change event for presets
-        this.order.preset.subscribe(function (newValue) {
-            self.changePreset(self, newValue);
-        });
-    }
-
-    ViewModel.prototype = {
-        changePreset: function (vm, newValue) {
+        // computed values
+        this.nextText = ko.pureComputed(function () {
+            ///<summary>returns text to display in the next button</summary>
+            var isLastStep = steps.done == this.step();
+            if (isLastStep) {
+                return 'Restart';
+            }
+            return 'Next';
+        }, this);
+        
+        this.isStepStart = ko.pureComputed(function() {
+            return this.step() === steps.start;
+        }, this);
+        
+        this.isStepSauce = ko.pureComputed(function() {
+            return this.step() === steps.sauce;
+        }, this);
+        
+        this.isStepToppings = ko.pureComputed(function() {
+            return this.step() === steps.toppings;
+        }, this);
+        
+        this.isStepDone = ko.pureComputed(function() {
+            return this.step() === steps.done;
+        }, this);
+        
+        this.preset.subscribe(function(newValue){
+            ///<summary>changes the pizza settings when a preset is selected</summary>
+			
             // remove all toppings
-            this.order.toppings.removeAll();
+            this.toppings.removeAll();
 
             for (var presetName in presets) {
-                // skip presets that don't match this
                 if (presetName !== newValue) {
+                    // skip presets that don't match this
                     continue;
                 }
 
+                // get preset from presets
                 var preset = presets[presetName];
 				
-                // change sauce to preset
-                this.order.sauce(preset.sauce);
-				
-                // add all preset toppings into
-                var toppings = this.order.toppings;
-                toppings.push.apply(toppings, preset.toppings);
+                // change sauce and toppings to preset
+                this.sauce(preset.sauce);
+                this.toppings.push.apply(this.toppings, preset.toppings);
                 break;
             }
-        },
+        }, this);
+    }
+    
+   ViewModel.prototype = {
         options: options,
-        submit: function () {
-            console.log(this);
+        presets: presets,
+        prev: function (vm) {
+            ///<summary>moves to the previous step</summary>
+            var newStep = vm.step() - 1;
+            if (newStep < 0) {
+                newStep = 0;
+            }
+            vm.step(newStep);
         },
-        reload: function () {
-            window.location.reload();
+        next: function (vm) {
+            ///<summary>moves to the next step or reloads if on last step</summary>            
+            var newStep = vm.step() + 1
+            if (newStep > steps.done) {
+                window.location.reload();
+            }
+            vm.step(newStep);
         }
     };
-
+    
+    // apply bindings to dom
     ko.applyBindings(new ViewModel());
 } ());
