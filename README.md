@@ -46,4 +46,4 @@ To run the code in node (and see it at [http://localhost:3001](http://localhost:
 
 ## Suggestions/Edits
 
-If you know how the code could better represent the framework better or if there is a bug, send me a pull request or if you are feeling particularly lazy, send me a message on [Twitter (@notoriousb1t)](https://twitter.com/notoriousb1t).  I welcome your suggestions.
+If you know how the code could better represent the framework or if there is a bug, send me a pull request or if you are feeling particularly lazy, send me a message on [Twitter (@notoriousb1t)](https://twitter.com/notoriousb1t).  I welcome your suggestions.
