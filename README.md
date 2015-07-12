@@ -17,8 +17,8 @@ The idea for creating a pizza customization came from thinking about all of this
 |/assets|shared resources (images, config, etc.)|
 |/assets-src|source files for assets (.less, .ai, .psd)|
 |/projects|framework specific code|
-|--/angularjs|AngularJS 1|
-|--/knockoutjs|KnockoutJS|
+|/projects/angularjs|AngularJS 1|
+|/projects/knockoutjs|KnockoutJS|
 
 ## How to Run/Edit it Locally
 
