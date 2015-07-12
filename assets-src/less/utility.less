@@ -1,0 +1,51 @@
+.stage-center {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1280px;
+	min-width: 320px;
+	width: 100%;
+}
+
+.text-right {
+	text-align: right;
+}
+.text-center {
+	text-align: center;
+}
+
+.text-inverse {
+	color: white;
+}
+
+.img-responsive {
+	max-width: 100%;
+	width: 100%;
+}
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.padding {
+	padding: @x-padding @y-padding;
+}
+
+.clickable {
+	.clickable();
+}
+
+@media screen and (max-width: @screen-md) {
+	.hidden-sm {
+		display: none;		
+	}
+}
+
+// mixins
+.box-sizing(@mode: border-box) {
+	-webkit-box-sizing: @mode;
+	box-sizing: @mode;
+}
