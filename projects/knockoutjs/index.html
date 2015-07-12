@@ -26,7 +26,7 @@
                 <div class="width-1-2"></div>
             </div>
         </nav>
-        <div ng-app="app" ng-controller="OrderController" class="page-content">
+        <div class="page-content">
             <div class="grid stage-center">
                 <div class="width-1-2 hidden-sm">
                     <div id="cuttingBoard" class="pizza" data-bind="css: { pizzaMedium: size() == 'Medium', pizzaLarge: size() == 'Large' }">
@@ -91,9 +91,11 @@
                             </h5>
                         </div>
                         <div class="form-group text-center">
-                            <button ng-show="step > steps.start" data-bind="click prev" class="btn">&laquo; Prev</button>
+                            <span data-bind="ifnot: isStepStart">
+                                <button data-bind="click: prev" class="btn">&laquo; Prev</button>
+                            </span>
                             <button data-bind="click: next" class="btn btn-inverse">
-                                <span data-bind="text: nextText"></span>&raquo;
+                                <span data-bind="text: nextText"></span> &raquo;
                             </button>
                         </div>
                     </div>

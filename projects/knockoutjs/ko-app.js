@@ -21,26 +21,26 @@
         // computed values
         this.nextText = ko.pureComputed(function () {
             ///<summary>returns text to display in the next button</summary>
-            var isLastStep = steps.done == this.step();
-            if (isLastStep) {
-                return 'Restart';
-            }
-            return 'Next';
+            return this.step() === steps.done ? 'Restart' : 'Next';
         }, this);
         
         this.isStepStart = ko.pureComputed(function() {
+            ///<summary>return true if the current step is 'start'</summary>
             return this.step() === steps.start;
         }, this);
         
         this.isStepSauce = ko.pureComputed(function() {
+            ///<summary>return true if the current step is 'sauce'</summary>            
             return this.step() === steps.sauce;
         }, this);
         
         this.isStepToppings = ko.pureComputed(function() {
+            ///<summary>return true if the current step is 'toppings'</summary>            
             return this.step() === steps.toppings;
         }, this);
         
         this.isStepDone = ko.pureComputed(function() {
+            ///<summary>return true if the current step is 'done'</summary>            
             return this.step() === steps.done;
         }, this);
         
@@ -83,6 +83,7 @@
             var newStep = vm.step() + 1
             if (newStep > steps.done) {
                 window.location.reload();
+                return;
             }
             vm.step(newStep);
         }
