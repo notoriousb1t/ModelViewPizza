@@ -30,18 +30,18 @@ If the Grunt Command Line tools aren't installed, run the following command in a
 
 Download and extract this repository or use git to clone it to a local directory.
 
-> git clone https://github.com/notoriousb1t/modelviewpizza.git
+> `git clone https://github.com/notoriousb1t/modelviewpizza.git`
 
 
 Change to the /modelviewpizza directory.  
 Use the following command to recompile the assets if needed
 
-> grunt
+> `grunt`
 
 
 To run the code in node (and see it at [http://localhost:3001](http://localhost:3001)), run the following command:
 
-> node server.js
+> `node server.js`
 
 
 ## Suggestions/Edits
