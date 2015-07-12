@@ -10,6 +10,16 @@ This project came from a desire to learn and evaluate each Model-View-* JavaScri
 
 The idea for creating a pizza customization came from thinking about all of this and then noticing that pizza screens are complex enough to do this while ordering a pizza.  I hope that anyone who comes here can benefit from the work I am putting into it.
 
+## Projects
+
+|folder|description|
+|:-------------|:-------------|
+|/assets|shared resources (images, config, etc.)|
+|/assets-src|source files for assets (.less, .ai, .psd)|
+|/projects|framework specific code|
+|--/angularjs|AngularJS 1|
+|--/knockoutjs|KnockoutJS|
+
 ## How to Run/Edit it Locally
 
 
