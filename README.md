@@ -19,6 +19,7 @@ The idea for creating a pizza customization came from thinking about all of this
 |/projects|framework specific code|
 |/projects/angularjs|AngularJS 1|
 |/projects/knockoutjs|KnockoutJS|
+|/projects/vuejs|VueJS|
 
 ## How to Run/Edit it Locally
 
