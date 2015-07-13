@@ -1,0 +1,105 @@
+<html lang="en-us">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KnockoutJS - Model View Pizza</title>
+        <link href="http://fonts.googleapis.com/css?family=Sarala:400,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/assets/styles/main.min.css" />
+        <link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
+        <script src="/assets/scripts/config.js"></script>
+    </head>
+    
+    <body>
+        <nav class="page-nav">
+            <div class="grid stage-center">
+                <div class="width-1-2">
+                    <a title="Home Page" href="/">
+						<img alt="Home" src="/assets/images/logo with text.svg" height="38" />
+                    </a>
+                    <a class="nav-item" target="_blank" href="https://github.com/notoriousb1t/modelviewpizza">
+                        GitHub
+                    </a>
+                </div>
+                <div class="width-1-2"></div>
+            </div>
+        </nav>
+        <div id="view" class="page-content">
+            <div class="grid stage-center">
+                <div class="width-1-2 hidden-sm">
+                    <div id="cuttingBoard" class="pizza" v-class="pizzaMedium: size == 'Medium', pizzaLarge: size == 'Large'">
+                        <img v-attr="src: '/assets/images/pizza/' + crust + '.png'" class="topping" />
+                        <img v-attr="src: '/assets/images/pizza/' + sauce + '.png'" class="topping" />
+                        <img v-attr="src: '/assets/images/pizza/' + cheese + '.png'" class="topping" />
+                        <div v-repeat="toppings">
+                            <img v-attr="src: '/assets/images/pizza/' + $value + '.png'" class="topping" />
+                        </div>
+                    </div>
+                </div>
+                <div class="width-1-2">
+                    <div class="pane level-3">
+                        <div v-if="isStepStart">
+                            <div class="form-group">
+                                <h3>Pick a Size</h3>
+                                <select v-model="size" options="options.sizes" class="ddl" aria-label="Pick a size"></select>
+                            </div>
+                            <div class="form-group">
+                                <h3>Pick a Pizza</h3>
+                                <select v-model="preset" options="options.presets" class="ddl" aria-label="Pick a pizza"></select>
+                            </div>
+                        </div>
+                        <div v-if="isStepSauce">
+                            <div class="form-group">
+                                <h3>Select Crust</h3>
+                                <select v-model="crust" options="options.crusts" class="ddl" aria-label="Select Crust"></select>
+                            </div>
+                            <div class="form-group">
+                                <h3>Select Sauce</h3>
+                                <select v-model="sauce" options="options.sauces" class="ddl" aria-label="Select Sauce"></select>
+                            </div>
+                            <div class="form-group">
+                                <h3>Select Cheese Intensity!</h3>
+                                <select v-model="cheese" options="options.cheeses" class="ddl" aria-label="Select Cheese Intensity!"></select>
+                            </div>
+                        </div>
+                        <div v-if="isStepToppings">
+                            <h3>Customize Your Toppings!</h3>
+                            <dl class="checkboxlist-inline">
+                                <dd v-repeat="toppingSelections" class="checkbox">
+                                    <label>
+                                        <input type="checkbox" v-model="selected" />
+                                        <span>{{value}}</span>
+                                    </label>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div v-if="isStepDone" class="text-center">
+                            <h4>Your {{preset}} is done!</h4>
+                            <p>
+                                Your {{size}} {{crust}} pizza has <span v-repeat="toppings"> {{$value}}, </span> {{sauce}}, and {{cheese}}.
+                            <p>
+                                <small>Once you are finished with that slice...</small>
+                            </p>
+                            <h5>be sure to checkout the source on
+                                <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
+                            </h5>
+                        </div>
+                        <div class="form-group text-center">
+                            <span v-if="!isStepStart">
+                                <button v-on="click: prev" class="btn">&laquo; Prev</button>
+                            </span>
+                            <button v-on="click: next" class="btn btn-inverse">
+                                {{nextText}} &raquo;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.7/vue.min.js"></script>
+        <script src="vue-app.js"></script>
+    </body>
+
+</html>
