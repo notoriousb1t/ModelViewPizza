@@ -8,7 +8,7 @@
     var options = config.options;
     var steps = config.steps;
 
-    window.vm = new Vue({
+    new Vue({
         computed: {
             isStepStart: function () {
                 ///<summary>return true if the current step is 'start'</summary>
@@ -31,6 +31,7 @@
                 return this.step === steps.done ? 'Restart' : 'Next';
             },
             toppings: function () {
+                ///<summary>returns a list of toppings that are selected</summary>
                 return this.toppingSelections
                     .filter(function (topping) { return topping.selected; })
                     .map(function (topping) { return topping.value; });
@@ -47,6 +48,7 @@
             sauce: initial.sauce,
             cheese: initial.cheese,
             toppingSelections: options.toppings.map(function (topping) {
+                ///<summary>returns an { value: toppingName, selected } for each topping name</summary>
                 return {
                     value: topping,
                     selected: false
