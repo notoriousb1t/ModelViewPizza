@@ -1,3 +1,4 @@
+/// <reference path="../../assets/scripts/config.js"/>
 /// <reference path="../../typings/angular/angular1.d.ts" />
 (function () {
     'use strict';

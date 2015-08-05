@@ -1,3 +1,4 @@
+/// <reference path="../../assets/scripts/config.js"/>
 /// <reference path="../../typings/vue/vue.d.ts" />
 (function () {
     'use strict';
@@ -58,7 +59,7 @@
         methods: {
             next: function () {
                 ///<summary>moves to the next step or reloads if on last step</summary>            
-                var newStep = this.step + 1
+                var newStep = this.step + 1;
                 if (newStep > steps.done) {
                     window.location.reload();
                     return;
@@ -93,9 +94,9 @@
                 if (preset) {
                     // change sauce and toppings to preset
                     this.sauce = preset.sauce;
-                    this.toppingSelections.forEach(function (topping) {
+                    this.toppingSelections.forEach(function(topping) {
                         topping.selected = preset.toppings.indexOf(topping.value) !== -1;
-                    })
+                    });
                 }
                 else {
                     // reset sauce and toppings

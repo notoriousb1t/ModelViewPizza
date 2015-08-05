@@ -1,3 +1,4 @@
+/// <reference path="../../assets/scripts/config.js"/>
 /// <reference path="../../typings/knockout/knockout.d.ts" />
 (function () {
     'use strict';
@@ -19,52 +20,14 @@
         this.toppings = ko.observableArray([]);
 		
         // computed values
-        this.nextText = ko.pureComputed(function () {
-            ///<summary>returns text to display in the next button</summary>
-            return this.step() === steps.done ? 'Restart' : 'Next';
-        }, this);
+        this.nextText = ko.pureComputed(this.nextText, this);
+        this.isStepStart = ko.pureComputed(this.isStepStart, this);
+        this.isStepSauce = ko.pureComputed(this.isStepSauce, this);
+        this.isStepToppings = ko.pureComputed(this.isStepToppings, this);
+        this.isStepDone = ko.pureComputed(this.isStepDone, this);
         
-        this.isStepStart = ko.pureComputed(function() {
-            ///<summary>return true if the current step is 'start'</summary>
-            return this.step() === steps.start;
-        }, this);
-        
-        this.isStepSauce = ko.pureComputed(function() {
-            ///<summary>return true if the current step is 'sauce'</summary>            
-            return this.step() === steps.sauce;
-        }, this);
-        
-        this.isStepToppings = ko.pureComputed(function() {
-            ///<summary>return true if the current step is 'toppings'</summary>            
-            return this.step() === steps.toppings;
-        }, this);
-        
-        this.isStepDone = ko.pureComputed(function() {
-            ///<summary>return true if the current step is 'done'</summary>            
-            return this.step() === steps.done;
-        }, this);
-        
-        this.preset.subscribe(function(newValue){
-            ///<summary>changes the pizza settings when a preset is selected</summary>
-			
-            // remove all toppings
-            this.toppings.removeAll();
-
-            for (var presetName in presets) {
-                if (presetName !== newValue) {
-                    // skip presets that don't match this
-                    continue;
-                }
-
-                // get preset from presets
-                var preset = presets[presetName];
-				
-                // change sauce and toppings to preset
-                this.sauce(preset.sauce);
-                this.toppings.push.apply(this.toppings, preset.toppings);
-                break;
-            }
-        }, this);
+        // subscribe to preset update event
+        this.preset.subscribe(this.onPresetChanged, this);
     }
     
    ViewModel.prototype = {
@@ -80,12 +43,53 @@
         },
         next: function (vm) {
             ///<summary>moves to the next step or reloads if on last step</summary>            
-            var newStep = vm.step() + 1
+            var newStep = vm.step() + 1;
             if (newStep > steps.done) {
                 window.location.reload();
                 return;
             }
             vm.step(newStep);
+        },
+        nextText: function () {
+            ///<summary>returns text to display in the next button</summary>
+            return this.step() === steps.done ? 'Restart' : 'Next';
+        },
+        isStepStart: function() {
+            ///<summary>return true if the current step is 'start'</summary>
+            return this.step() === steps.start;
+        },
+        isStepSauce: function() {
+            ///<summary>return true if the current step is 'sauce'</summary>            
+            return this.step() === steps.sauce;
+        },
+        isStepToppings: function() {
+            ///<summary>return true if the current step is 'toppings'</summary>            
+            return this.step() === steps.toppings;
+        },
+        isStepDone: function() {
+            ///<summary>return true if the current step is 'done'</summary>            
+            return this.step() === steps.done;
+        },
+        onPresetChanged: function (newValue) {
+            ///<summary>changes the pizza settings when a preset is selected</summary>
+            
+            // remove all toppings
+            this.toppings.removeAll();
+            
+            for (var presetName in presets) {
+                if (presetName !== newValue) {
+                    // skip presets that don't match this
+                    continue;
+                }
+                
+                // get preset from presets
+                var preset = presets[presetName];
+                
+                // change sauce and toppings to preset
+                this.sauce(preset.sauce);
+                this.toppings.push.apply(this.toppings, preset.toppings);
+                break;
+            }
         }
     };
     
