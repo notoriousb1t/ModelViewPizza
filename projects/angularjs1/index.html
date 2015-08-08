@@ -1,4 +1,4 @@
-<html lang="en-us">
+﻿<html lang="en-us">
     
     <head>
         <meta charset="utf-8" />
@@ -18,7 +18,7 @@
             <div class="grid stage-center">
                 <div class="width-1-2">
                     <a href="/">
-						<img src="/assets/images/logo with text.svg" height="38" />
+						<img alt="" role="presentation"  src="/assets/images/logo with text.svg" height="38" />
                     </a>
                     <a class="nav-item" target="_blank" href="https://github.com/notoriousb1t/modelviewpizza">
                         GitHub
@@ -31,11 +31,11 @@
             <div class="grid stage-center">
                 <div class="width-1-2 hidden-sm">
                     <div id="cuttingBoard" class="pizza" ng-class="{ pizzaMedium: size == 'Medium', pizzaLarge: size == 'Large' }">
-                        <img ng-attr-src="{{ '/assets/images/pizza/' + crust + '.png' }}" class="topping" />
-                        <img ng-attr-src="{{ '/assets/images/pizza/' + sauce + '.png' }}" class="topping" />
-                        <img ng-attr-src="{{ '/assets/images/pizza/' + cheese + '.png' }}" class="topping" />
+                        <img alt="" role="presentation"  ng-attr-src="{{ '/assets/images/pizza/' + crust + '.png' }}" class="topping" />
+                        <img alt="" role="presentation"  ng-attr-src="{{ '/assets/images/pizza/' + sauce + '.png' }}" class="topping" />
+                        <img alt="" role="presentation"  ng-attr-src="{{ '/assets/images/pizza/' + cheese + '.png' }}" class="topping" />
                         <div ng-repeat="topping in toppings">
-                            <img ng-attr-src="{{ '/assets/images/pizza/' + topping + '.png' }}" class="topping" />
+                            <img alt="" role="presentation"  ng-attr-src="{{ '/assets/images/pizza/' + topping + '.png' }}" class="topping" />
                         </div>
                     </div>
                 </div>

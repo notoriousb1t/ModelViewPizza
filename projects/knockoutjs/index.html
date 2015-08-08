@@ -1,4 +1,4 @@
-<html lang="en-us">
+﻿<html lang="en-us">
     
     <head>
         <meta charset="utf-8" />
@@ -30,11 +30,11 @@
             <div class="grid stage-center">
                 <div class="width-1-2 hidden-sm">
                     <div id="cuttingBoard" class="pizza" data-bind="css: { pizzaMedium: size() == 'Medium', pizzaLarge: size() == 'Large' }">
-                        <img data-bind="attr: { src: '/assets/images/pizza/' + crust() + '.png' }" class="topping" />
-                        <img data-bind="attr: { src: '/assets/images/pizza/' + sauce() + '.png' }" class="topping" />
-                        <img data-bind="attr: { src: '/assets/images/pizza/' + cheese() + '.png' }" class="topping" />
+                        <img alt="" role="presentation" data-bind="attr: { src: '/assets/images/pizza/' + crust() + '.png' }" class="topping" />
+                        <img alt="" role="presentation" data-bind="attr: { src: '/assets/images/pizza/' + sauce() + '.png' }" class="topping" />
+                        <img alt="" role="presentation" data-bind="attr: { src: '/assets/images/pizza/' + cheese() + '.png' }" class="topping" />
                         <div data-bind="foreach: toppings">
-                            <img data-bind="attr: { src: '/assets/images/pizza/' + $data + '.png' }" class="topping" />
+                            <img alt="" role="presentation" data-bind="attr: { src: '/assets/images/pizza/' + $data + '.png' }" class="topping" />
                         </div>
                     </div>
                 </div>

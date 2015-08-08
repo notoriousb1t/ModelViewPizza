@@ -1,4 +1,4 @@
-<html lang="en-us">
+﻿<html lang="en-us">
     
     <head>
         <meta charset="utf-8" />
@@ -30,11 +30,11 @@
             <div class="grid stage-center">
                 <div class="width-1-2 hidden-sm">
                     <div id="cuttingBoard" class="pizza" v-class="pizzaMedium: size == 'Medium', pizzaLarge: size == 'Large'">
-                        <img v-attr="src: '/assets/images/pizza/' + crust + '.png'" class="topping" />
-                        <img v-attr="src: '/assets/images/pizza/' + sauce + '.png'" class="topping" />
-                        <img v-attr="src: '/assets/images/pizza/' + cheese + '.png'" class="topping" />
-                        <div v-repeat="toppings">
-                            <img v-attr="src: '/assets/images/pizza/' + $value + '.png'" class="topping" />
+                        <img alt="" role="presentation" v-attr="src: '/assets/images/pizza/' + crust + '.png'" class="topping" />
+                        <img alt="" role="presentation" v-attr="src: '/assets/images/pizza/' + sauce + '.png'" class="topping" />
+                        <img alt="" role="presentation" v-attr="src: '/assets/images/pizza/' + cheese + '.png'" class="topping" />
+                        <div alt="" role="presentation" v-repeat="toppings">
+                            <img alt="" role="presentation" v-attr="src: '/assets/images/pizza/' + $value + '.png'" class="topping" />
                         </div>
                     </div>
                 </div>
