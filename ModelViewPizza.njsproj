@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{279d7b9f-cf4f-4d2a-8291-da1ddb983ae7}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -19,6 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="assets-src\images\pizza.ai" />
+    <Content Include="assets-src\less\base.less" />
+    <Content Include="assets-src\less\hashtag.less" />
+    <Content Include="assets-src\less\main.less" />
+    <Content Include="assets-src\less\mixins.less" />
+    <Content Include="assets-src\less\utility.less" />
+    <Content Include="assets-src\less\variables.less" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="LICENSE.md" />
