@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{279d7b9f-cf4f-4d2a-8291-da1ddb983ae7}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,8 +22,10 @@
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="LICENSE.md" />
+    <Content Include="projects\kendoui\index.html" />
     <Content Include="README.md" />
     <Compile Include="gruntfile.js" />
+    <Compile Include="projects\kendoui\k-app.js" />
     <Compile Include="server.js" />
     <Content Include="assets\images\board.png" />
     <Content Include="assets\images\board.jpg" />
@@ -93,6 +95,7 @@
     <Content Include="projects\vuejs\index.html" />
     <Compile Include="projects\vuejs\vue-app.js" />
     <TypeScriptCompile Include="typings\angular\angular1.d.ts" />
+    <TypeScriptCompile Include="typings\kendo-ui\kendo-ui.d.ts" />
     <TypeScriptCompile Include="typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="typings\node\node.d.ts" />
     <TypeScriptCompile Include="typings\vue\vue.d.ts" />
@@ -109,10 +112,12 @@
     <Folder Include="projects" />
     <Folder Include="projects\angularjs1" />
     <Folder Include="projects\knockoutjs" />
+    <Folder Include="projects\kendoui\" />
     <Folder Include="projects\vuejs" />
     <Folder Include="typings" />
     <Folder Include="typings\angular" />
     <Folder Include="typings\knockout" />
+    <Folder Include="typings\kendo-ui\" />
     <Folder Include="typings\node" />
     <Folder Include="typings\vue" />
   </ItemGroup>
