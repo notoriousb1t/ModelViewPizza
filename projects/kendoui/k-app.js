@@ -152,11 +152,21 @@
             ///<summary>returns the image for sauce</summary>
             return '/assets/images/pizza/' + this.get('sauce') + '.png';
         },
+        summary: function () {
+            var size = this.get('size');
+            var crust = this.get('crust');
+            var toppings = this.toppings();
+            var sauce = this.get('sauce');
+            var cheese = this.get('cheese');
+
+            return 'Your ' + size + ' ' + crust + ' pizza has ' + 
+                toppings.join(', ') + ', ' + sauce + ', and ' + cheese + '.';
+        },
         toppings: function () {
             ///<summary>returns a list of toppings that are selected</summary>
             return this.toppingSelections
-                .filter(function (topping) { return topping.selected; })
-                .map(function (topping) { return topping.value; });
+                .filter(function (topping) { return topping.get('selected'); })
+                .map(function (topping) { return topping.get('value'); });
         }
     };
 

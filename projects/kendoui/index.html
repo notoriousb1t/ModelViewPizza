@@ -71,9 +71,16 @@
                             class="checkboxlist-inline"></dl>
                     </div>
 
-                    <div data-bind="visible: isStepDone, source: this"
-                         data-template="doneMessageTemplate"
-                         class="text-center">
+                    <div data-bind="visible: isStepDone" class="text-center">
+                        <h4>Your <span data-bind="text: preset"></span> is done!</h4>
+                        <p data-bind="text: summary"></p>
+                        <p>
+                            <small>Once you are finished with that slice...</small>
+                        </p>
+                        <h5>
+                            be sure to checkout the source on
+                            <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/kendoui">GitHub!</a>
+                        </h5>
                     </div>
 
                     <div class="form-group text-center">
@@ -103,25 +110,6 @@
             </label>
         </dd>
     </script>
-
-    <script type="text/template" id="doneMessageTemplate">
-        <h4>Your #: preset # is done!</h4>
-        <p>
-            Your #: size # #: crust # pizza has
-            # for (var i = 0; i < toppings.length; i++) { #
-            #: toppings[i] #,
-            # } #
-            #: sauce #, and #: cheese #.
-        </p>
-        <p>
-            <small>Once you are finished with that slice...</small>
-        </p>
-        <h5>
-            be sure to checkout the source on
-            <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/kendoui">GitHub!</a>
-        </h5>
-    </script>
-
     <script src="k-app.js"></script>
 </body>
 
