@@ -70,15 +70,17 @@
         {{/each}}
     </script>
     <script id='step3' type='text/html'>
-        <h4>Your {{preset}} is done!</h4>
-        <p>
-            Your {{size}} {{crust}} pizza has {{#each toppings}} {{.}}, {{/each}} {{sauce}}, and {{cheese}}.
-        <p>
-            <small>Once you are finished with that slice...</small>
-        </p>
-        <h5>be sure to checkout the source on
-            <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
-        </h5>
+        <div class="text-center">
+            <h4>Your {{preset}} is done!</h4>
+            <p>
+                Your {{size}} {{crust}} pizza has {{#each toppings}} {{.}},&nbsp; {{/each}} {{sauce}}, and {{cheese}}.
+            <p>
+                <small>Once you are finished with that slice...</small>
+            </p>
+            <h5>be sure to checkout the source on
+                <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/ractivejs">GitHub!</a>
+            </h5>
+        </div>
     </script>
 <body>
     <!-- Component Definitions -->
