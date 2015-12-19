@@ -20,6 +20,7 @@ The idea for creating a pizza customization came from thinking about all of this
 |/projects/angularjs|AngularJS 1|
 |/projects/kendoui|KendoUI|
 |/projects/knockoutjs|KnockoutJS|
+|/projects/ractivejs|RactiveJS|
 |/projects/vuejs|VueJS|
 
 ## How to Run/Edit it Locally
