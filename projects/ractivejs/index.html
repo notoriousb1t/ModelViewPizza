@@ -1,0 +1,134 @@
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RactiveJS - Model View Pizza</title>
+    <link href="http://fonts.googleapis.com/css?family=Sarala:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/assets/styles/main.min.css" />
+    <link rel="icon" type="x-icon/image" href="/assets/images/favicon.ico" />
+    <script src="/assets/scripts/config.js"></script>
+</head>
+    <!-- Partial Definitions -->
+    <script id='nav' type='text/html'>
+        <nav class="page-nav">
+            <div class="grid stage-center">
+                <div class="width-1-2">
+                    <a title="Home Page" href="/">
+                        <img alt="Home" src="/assets/images/logo with text.svg" height="38" />
+                    </a>
+                    <a class="nav-item" target="_blank" href="https://github.com/notoriousb1t/modelviewpizza">
+                    GitHub
+                </a>
+                </div>
+            </div>
+        </nav>
+    </script>
+    <!-- TODO:  give step partials better names (config.stepNames) maybe someone could fix in a PR? -->
+    <script id='step0' type='text/html'>
+        <h3>Pick a Size</h3>
+        <select value='{{size}}'>
+        {{#each options.sizes}}
+            <option value='{{.}}'>{{.}}</option>
+            {{/each}}
+        </select>
+        <h3>Pick a Pizza</h3>
+        <select value='{{preset}}'>
+            {{#each options.presets}}
+            <option value='{{.}}'>{{.}}</option>
+            {{/each}}
+        </select>
+    </script>
+    <script id='step1' type='text/html'>
+        <h3>Select Crust</h3>
+        <select value='{{crust}}'>
+            {{#each options.crusts}}
+            <option value='{{.}}'>{{.}}</option>
+            {{/each}}
+        </select>
+        <h3>Select Sauce</h3>
+        <select value='{{sauce}}'>
+            {{#each options.sauces}}
+            <option value='{{.}}'>{{.}}</option>
+            {{/each}}
+        </select>
+        <h3>Select Cheese Intensity!</h3>
+        <select value='{{cheese}}'>
+            {{#each options.cheeses}}
+            <option value='{{.}}'>{{.}}</option>
+            {{/each}}
+        </select>
+    </script>
+    <script id='step2' type='text/html'>
+        <h3>Customize Your Toppings!</h3>
+        {{#each options.toppings}}
+            <input type='checkbox' id='{{.}}' value='{{.}}' name='{{toppings}}'/>
+            <label for='{{.}}'>{{.}}</label>
+        <br />
+        {{/each}}
+    </script>
+    <script id='step3' type='text/html'>
+        <h4>Your {{preset}} is done!</h4>
+        <p>
+            Your {{size}} {{crust}} pizza has {{#each toppings}} {{.}}, {{/each}} {{sauce}}, and {{cheese}}.
+        <p>
+            <small>Once you are finished with that slice...</small>
+        </p>
+        <h5>be sure to checkout the source on
+            <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
+        </h5>
+    </script>
+<body>
+    <!-- Component Definitions -->
+    <script id='pizza' type='text/html'>
+        <div id="cuttingBoard" class="pizza pizza{{size}}"> <!-- pizzaMedium or pizzaLarge -->
+            <img alt="" role="presentation" src='/assets/images/pizza/{{crust}}.png' class="topping" />
+            <img alt="" role="presentation" src='/assets/images/pizza/{{sauce}}.png' class="topping" />
+            <img alt="" role="presentation" src='/assets/images/pizza/{{cheese}}.png' class="topping" /> 
+            {{#each toppings}}
+                <img alt="" role="presentation" src='/assets/images/pizza/{{this}}.png' class="topping" /> 
+            {{/each}}
+        </div>
+    </script>
+
+    <script id='setup' type='text/html'>
+        <!-- {{> syntax loads partials by id (see above) -->
+        {{> "step" + step}}
+        <br />
+        <div class="form-group text-center">
+        {{#if step}}
+            <button class="btn" on-click='set("step", step-1)'>&laquo; Prev</button>
+        {{/if}}
+        {{#if step === 3}}
+            <button class='btn btn-inverse' on-click='resetPizza'>Restart &raquo;</button>
+        {{else}}
+            <button class='btn btn-inverse' on-click='set("step", step+1)'>Next &raquo;</button>
+        {{/if}}
+        </div>
+    </script>
+
+    <script id='home' type='text/html'>
+        {{> nav}}
+
+        <div class="page-content">
+            <div class="grid stage-center">
+                <div class="width-1-2 hidden-sm">
+                    <Pizza size='{{size}}' crust='{{crust}}' sauce='{{sauce}}' cheese='{{cheese}}' toppings='{{toppings}}' />
+                </div>
+                <div class="width-1-2">
+                    <div class="pane level-3">
+                        <Setup options='{{config.options}}' presets='{{config.presets}}' size='{{size}}' crust='{{crust}}' sauce='{{sauce}}'
+                               cheese='{{cheese}}' toppings='{{toppings}}' preset='{{preset}}' step='{{step}}' />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</body>
+<script src="http://cdn.ractivejs.org/latest/ractive.js"></script> <!-- Created on Ractive 0.7.3 -->
+<script src="ractive-app.js"></script>
+
+</html>
