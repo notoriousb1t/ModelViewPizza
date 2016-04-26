@@ -96,14 +96,16 @@
             this.setState({ size: e.target.value });
         },
         onToppingChange(e) {
-            var topping = e.target.checked;
-            var toppingIndex = this.state.toppingSelections.indexOf(topping);
+            var topping = e.target.dataset.name;
             var newToppings = this.state.toppingSelections.slice(0);
+            var toppingIndex = newToppings.indexOf(topping);
+            
             if (toppingIndex === -1) {
                 newToppings.push(e.target.dataset.name);
             } else {
                 newToppings.splice(toppingIndex, 1);
             }
+            
             this.setState({ toppingSelections: newToppings });  
         },
         render() {
@@ -113,8 +115,10 @@
                         <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.crust + ".png"} className="topping" />
                         <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.sauce + ".png"}  className="topping" />
                         <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.cheese + ".png"}  className="topping" />
-                        <div alt="" role="presentation" >
-                            <img alt="" role="presentation"  className="topping" />
+                        <div alt="" role="presentation">
+                            {this.state.toppingSelections.map(topping =>
+                                <img src={'/assets/images/pizza/' + topping + '.png'} alt="" role="presentation" className="topping" />)
+                            }
                         </div>
                     </div>
                 </div>
@@ -159,7 +163,7 @@
                                         <p>
                                             <small>Once you are finished with that slice...</small>
                                         </p>
-                                        <h5>be sure to checkout the source on <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
+                                        <h5>be sure to checkout the source on <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/reactjs">GitHub!</a>
                                         </h5>
                                     </div>);
                                 default:

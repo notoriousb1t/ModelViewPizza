@@ -110,14 +110,16 @@ var AppComponent = React.createClass({
         this.setState({ size: e.target.value });
     },
     onToppingChange(e) {
-        var topping = e.target.checked;
-        var toppingIndex = this.state.toppingSelections.indexOf(topping);
+        var topping = e.target.dataset.name;
         var newToppings = this.state.toppingSelections.slice(0);
+        var toppingIndex = newToppings.indexOf(topping);
+
         if (toppingIndex === -1) {
             newToppings.push(e.target.dataset.name);
         } else {
             newToppings.splice(toppingIndex, 1);
         }
+
         this.setState({ toppingSelections: newToppings });
     },
     render() {
@@ -136,7 +138,7 @@ var AppComponent = React.createClass({
                     React.createElement(
                         "div",
                         { alt: "", role: "presentation" },
-                        React.createElement("img", { alt: "", role: "presentation", className: "topping" })
+                        this.state.toppingSelections.map(topping => React.createElement("img", { src: '/assets/images/pizza/' + topping + '.png', alt: "", role: "presentation", className: "topping" }))
                     )
                 )
             ),
