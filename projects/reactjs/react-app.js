@@ -21,6 +21,29 @@ var Select = React.createClass({
     }
 });
 
+var CheckBoxList = React.createClass({
+    render() {
+        return React.createElement(
+            "dl",
+            { className: "checkboxlist-inline" },
+            this.props.options.map(option => React.createElement(
+                "dd",
+                { className: "checkbox" },
+                React.createElement(
+                    "label",
+                    null,
+                    React.createElement("input", { type: "checkbox", "data-name": option, checked: this.props.value.indexOf(option) !== -1, onClick: this.props.onChange }),
+                    React.createElement(
+                        "span",
+                        null,
+                        option
+                    )
+                )
+            ))
+        );
+    }
+});
+
 var AppComponent = React.createClass({
     getInitialState() {
         return {
@@ -49,20 +72,53 @@ var AppComponent = React.createClass({
         }
         this.setState({ step: newStep });
     },
-    onSizeChange(e) {
-        this.setState({ size: e.target.value });
-    },
-    onPresetChange(e) {
-        this.setState({ preset: e.target.value });
+    onCheeseChange(e) {
+        this.setState({ cheese: e.target.value });
     },
     onCrustChange(e) {
         this.setState({ crust: e.target.value });
     },
+    onPresetChange(e) {
+        var presetName = e.target.value;
+        var sauce = undefined;
+        var toppings = undefined;
+        for (var preset in presets) {
+            if (preset !== presetName) {
+                // skip presets that don't match this
+                continue;
+            }
+
+            // get preset from presets
+            var preset = presets[preset];
+
+            // change sauce and toppings to preset
+            sauce = preset.sauce;
+            toppings = preset.toppings.slice(0);
+            break;
+        }
+
+        this.setState({
+            preset: presetName,
+            toppingSelections: toppings || [],
+            sauce: sauce || this.state.sauce
+        });
+    },
     onSauceChange(e) {
         this.setState({ sauce: e.target.value });
     },
-    onCheeseChange(e) {
-        this.setState({ cheese: e.target.value });
+    onSizeChange(e) {
+        this.setState({ size: e.target.value });
+    },
+    onToppingChange(e) {
+        var topping = e.target.checked;
+        var toppingIndex = this.state.toppingSelections.indexOf(topping);
+        var newToppings = this.state.toppingSelections.slice(0);
+        if (toppingIndex === -1) {
+            newToppings.push(e.target.dataset.name);
+        } else {
+            newToppings.splice(toppingIndex, 1);
+        }
+        this.setState({ toppingSelections: newToppings });
     },
     render() {
         return React.createElement(
@@ -73,10 +129,10 @@ var AppComponent = React.createClass({
                 { className: "width-1-2 hidden-sm" },
                 React.createElement(
                     "div",
-                    { id: "cuttingBoard", className: "pizza" },
-                    React.createElement("img", { alt: "", role: "presentation", className: "topping" }),
-                    React.createElement("img", { alt: "", role: "presentation", className: "topping" }),
-                    React.createElement("img", { alt: "", role: "presentation", className: "topping" }),
+                    { id: "cuttingBoard", className: this.state.size === 'Medium' ? 'pizza pizzaMedium' : 'pizza pizzaLarge' },
+                    React.createElement("img", { alt: "", role: "presentation", src: "/assets/images/pizza/" + this.state.crust + ".png", className: "topping" }),
+                    React.createElement("img", { alt: "", role: "presentation", src: "/assets/images/pizza/" + this.state.sauce + ".png", className: "topping" }),
+                    React.createElement("img", { alt: "", role: "presentation", src: "/assets/images/pizza/" + this.state.cheese + ".png", className: "topping" }),
                     React.createElement(
                         "div",
                         { alt: "", role: "presentation" },
@@ -153,33 +209,7 @@ var AppComponent = React.createClass({
                                     )
                                 );
                             case steps.toppings:
-                                return React.createElement(
-                                    "div",
-                                    null,
-                                    React.createElement(
-                                        "h3",
-                                        null,
-                                        "Customize Your Toppings!"
-                                    ),
-                                    React.createElement(
-                                        "dl",
-                                        { className: "checkboxlist-inline" },
-                                        React.createElement(
-                                            "dd",
-                                            { className: "checkbox" },
-                                            React.createElement(
-                                                "label",
-                                                null,
-                                                React.createElement("input", { type: "checkbox" }),
-                                                React.createElement(
-                                                    "span",
-                                                    null,
-                                                    "/*value*/"
-                                                )
-                                            )
-                                        )
-                                    )
-                                );
+                                return React.createElement(CheckBoxList, { options: options.toppings, value: this.state.toppingSelections, onChange: this.onToppingChange });
                             case steps.done:
                                 return React.createElement(
                                     "div",
@@ -199,11 +229,13 @@ var AppComponent = React.createClass({
                                         " ",
                                         this.state.crust,
                                         " pizza has ",
-                                        React.createElement(
+                                        this.state.toppingSelections.map(topping => React.createElement(
                                             "span",
                                             null,
-                                            " /*$value*/, "
-                                        ),
+                                            " ",
+                                            topping,
+                                            ","
+                                        )),
                                         " ",
                                         this.state.sauce,
                                         ", and ",
@@ -222,7 +254,7 @@ var AppComponent = React.createClass({
                                     React.createElement(
                                         "h5",
                                         null,
-                                        "be sure to checkout the source on",
+                                        "be sure to checkout the source on ",
                                         React.createElement(
                                             "a",
                                             { target: "_blank", href: "https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs" },

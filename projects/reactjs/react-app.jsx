@@ -15,6 +15,21 @@
         }
     });
 
+    var CheckBoxList = React.createClass({
+        render() {
+            return (<dl className="checkboxlist-inline">
+                {this.props.options.map(option => (
+                    <dd className="checkbox">
+                        <label>
+                            <input type="checkbox" data-name={option} checked={this.props.value.indexOf(option) !== -1} onClick={this.props.onChange} />
+                            <span>{option}</span>
+                        </label>
+                    </dd>
+                ))}
+            </dl>);
+        }
+    });
+
     var AppComponent = React.createClass({
         getInitialState() {
             return {
@@ -43,28 +58,61 @@
             }
             this.setState({ step: newStep });
         },
-        onSizeChange(e) {
-            this.setState({ size: e.target.value });
-        },
-        onPresetChange(e) {
-            this.setState({ preset: e.target.value });
+        onCheeseChange(e) {
+            this.setState({ cheese: e.target.value });
         },
         onCrustChange(e) {
             this.setState({ crust: e.target.value });
+        },    
+        onPresetChange(e) {
+            var presetName = e.target.value;
+            var sauce = undefined;
+            var toppings = undefined;
+            for (var preset in presets) {
+                if (preset !== presetName) {
+                    // skip presets that don't match this
+                    continue;
+                }
+                
+                // get preset from presets
+                var preset = presets[preset];
+                
+                // change sauce and toppings to preset
+                sauce = preset.sauce;
+                toppings = preset.toppings.slice(0);
+                break;
+            }
+            
+            this.setState({
+                preset: presetName,
+                toppingSelections: toppings || [],
+                sauce: sauce || this.state.sauce
+            });
         },
         onSauceChange(e) {
             this.setState({ sauce: e.target.value });
         },
-        onCheeseChange(e) {
-            this.setState({ cheese: e.target.value });
+        onSizeChange(e) {
+            this.setState({ size: e.target.value });
+        },
+        onToppingChange(e) {
+            var topping = e.target.checked;
+            var toppingIndex = this.state.toppingSelections.indexOf(topping);
+            var newToppings = this.state.toppingSelections.slice(0);
+            if (toppingIndex === -1) {
+                newToppings.push(e.target.dataset.name);
+            } else {
+                newToppings.splice(toppingIndex, 1);
+            }
+            this.setState({ toppingSelections: newToppings });  
         },
         render() {
             return (<div className="grid stage-center">
                 <div className="width-1-2 hidden-sm">
-                    <div id="cuttingBoard" className="pizza" >
-                        <img alt="" role="presentation"  className="topping" />
-                        <img alt="" role="presentation"  className="topping" />
-                        <img alt="" role="presentation"  className="topping" />
+                    <div id="cuttingBoard" className={this.state.size === 'Medium' ? 'pizza pizzaMedium' : 'pizza pizzaLarge' } >
+                        <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.crust + ".png"} className="topping" />
+                        <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.sauce + ".png"}  className="topping" />
+                        <img alt="" role="presentation" src={"/assets/images/pizza/" + this.state.cheese + ".png"}  className="topping" />
                         <div alt="" role="presentation" >
                             <img alt="" role="presentation"  className="topping" />
                         </div>
@@ -101,28 +149,17 @@
                                         </div>
                                     </div>);
                                 case steps.toppings:
-                                    return (<div >
-                                        <h3>Customize Your Toppings!</h3>
-                                        <dl className="checkboxlist-inline">
-                                            <dd className="checkbox">
-                                                <label>
-                                                    <input type="checkbox"  />
-                                                    <span>/*value*/</span>
-                                                </label>
-                                            </dd>
-                                        </dl>
-                                    </div>);
+                                    return (<CheckBoxList options={options.toppings} value={this.state.toppingSelections} onChange={this.onToppingChange} />);
                                 case steps.done:
                                     return (<div className="text-center">
                                         <h4>Your {this.state.preset} is done!</h4>
                                         <p>
-                                            Your {this.state.size} {this.state.crust} pizza has <span> /*$value*/, </span> {this.state.sauce}, and {this.state.cheese}.
+                                            Your {this.state.size} {this.state.crust} pizza has {this.state.toppingSelections.map(topping => (<span> {topping},</span>))} {this.state.sauce}, and {this.state.cheese}.
                                         </p>
                                         <p>
                                             <small>Once you are finished with that slice...</small>
                                         </p>
-                                        <h5>be sure to checkout the source on
-                                            <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
+                                        <h5>be sure to checkout the source on <a target="_blank" href="https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs">GitHub!</a>
                                         </h5>
                                     </div>);
                                 default:
