@@ -18,10 +18,12 @@
     "serve-static": "^1.10.0"
   },
   "scripts": {
-    "start": "npm run babel && npm run lessnowatch",
-    "babel": "babel projects --out-dir projects -x \".jsx\"",
+    "start": "npm run babelnowatch && npm run lessnowatch",
+    "babel": "babel projects --watch --out-dir projects -x \".jsx\"",
+    "babelnowatch": "babel projects --out-dir projects -x \".jsx\"",
     "less": "autoless --autoprefix \"last 2 versions\" 'assets-src/less' 'assets/styles'",
-    "lessnowatch": "autoless --no-watch --autoprefix \"last 2 versions\" 'assets-src/less' 'assets/styles'"
+    "lessnowatch": "autoless --no-watch --autoprefix \"last 2 versions\" 'assets-src/less' 'assets/styles'",
+    "dev": "concurrently \"npm run babel\" \"npm run less\" \"node server.js\""
   },
   "main": "server.js"
 }
