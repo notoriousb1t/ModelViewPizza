@@ -21,15 +21,12 @@ The idea for creating a pizza customization came from thinking about all of this
 |/projects/kendoui|KendoUI|
 |/projects/knockoutjs|KnockoutJS|
 |/projects/ractivejs|RactiveJS|
+|/projects/reactjs|ReactJS|
 |/projects/vuejs|VueJS|
 
 ## How to Run/Edit it Locally
 
 If NodeJS is not on your system, download [NodeJS](https://nodejs.org/download/) and install it.
-If the Grunt Command Line tools aren't installed, run the following command in a command line:
-
-> `npm install grunt-cli -g`
-
 
 Download and extract this repository or use git to clone it to a local directory.
 
@@ -39,7 +36,7 @@ Download and extract this repository or use git to clone it to a local directory
 Change to the /modelviewpizza directory.  
 Use the following command to recompile the assets if needed
 
-> `grunt`
+> `npm start`
 
 
 To run the code in node (and see it at [http://localhost:3001](http://localhost:3001)), run the following command:
