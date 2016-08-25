@@ -211,7 +211,19 @@ var AppComponent = React.createClass({
                                     )
                                 );
                             case steps.toppings:
-                                return React.createElement(CheckBoxList, { options: options.toppings, value: this.state.toppingSelections, onChange: this.onToppingChange });
+                                 return React.createElement(
+                                    "div",
+                                    null,
+                                    React.createElement(
+                                        "h3",
+                                        null,
+                                        "Customize Your Toppings!"
+                                        ),
+                                    React.createElement(
+                                        CheckBoxList, 
+                                        { options: options.toppings, value: this.state.toppingSelections, onChange: this.onToppingChange }
+                                        )
+                                    );
                             case steps.done:
                                 return React.createElement(
                                     "div",
