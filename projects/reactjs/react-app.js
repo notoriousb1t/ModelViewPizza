@@ -259,7 +259,7 @@ var AppComponent = React.createClass({
                                         "be sure to checkout the source on ",
                                         React.createElement(
                                             "a",
-                                            { target: "_blank", href: "https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs" },
+                                            { target: "_blank", href: "https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/reactjs" },
                                             "GitHub!"
                                         )
                                     )
