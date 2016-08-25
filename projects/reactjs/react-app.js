@@ -211,7 +211,19 @@ var AppComponent = React.createClass({
                                     )
                                 );
                             case steps.toppings:
-                                return React.createElement(CheckBoxList, { options: options.toppings, value: this.state.toppingSelections, onChange: this.onToppingChange });
+                                 return React.createElement(
+                                    "div",
+                                    null,
+                                    React.createElement(
+                                        "h3",
+                                        null,
+                                        "Customize Your Toppings!"
+                                        ),
+                                    React.createElement(
+                                        CheckBoxList, 
+                                        { options: options.toppings, value: this.state.toppingSelections, onChange: this.onToppingChange }
+                                        )
+                                    );
                             case steps.done:
                                 return React.createElement(
                                     "div",
@@ -259,7 +271,7 @@ var AppComponent = React.createClass({
                                         "be sure to checkout the source on ",
                                         React.createElement(
                                             "a",
-                                            { target: "_blank", href: "https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/vuejs" },
+                                            { target: "_blank", href: "https://github.com/notoriousb1t/modelviewpizza/tree/master/projects/reactjs" },
                                             "GitHub!"
                                         )
                                     )
